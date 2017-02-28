@@ -1,21 +1,10 @@
-.brand-logo{
-    margin-left: 20px;
+#logo{
+    margin-left: 50px;
+    font-weight: 300px;
+    font-size: 30px;
+    height: 100px;
 }
 
-#username{
-    margin-left: 0px;
+#header{
 
-}
-
-#password{
-    margin-left: 70px;
-
-}
-
-#submit{
-    margin-left: -50px;
-}
-
-#nav{
-    height:100px;
 }
