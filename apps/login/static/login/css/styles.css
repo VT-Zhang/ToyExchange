@@ -1,10 +1,55 @@
+#wrapper{
+    /*background-color: #e1f5fe;*/
+    font-weight: 200;
+}
+
 #logo{
-    margin-left: 50px;
-    font-weight: 300px;
+    font-weight: 200;
     font-size: 30px;
     height: 100px;
+    margin-left: 150px;
+    font-size: 40px;
 }
 
 #header{
+    height:80px;
+}
 
+#main_txt{
+    margin-top: 30px;
+    font-weight: 200;
+}
+
+#account{
+    margin-top: 20px;
+}
+#top_menu{
+    margin-right: 30px;
+}
+
+#main{
+    background-image: url ({% static '/login/img/seigaiha.png' %});
+    background-repeat: repeat;
+}
+
+#login_button{
+    /*margin-top: 20px;*/
+}
+
+#messages{
+    margin-left: 20px;
+    color:red;
+}
+
+#service{
+    font-weight: 200;
+}
+
+
+.input-field label {
+     color: #03a9f4;
+   }
+
+#bottom{
+    font-weight: 200;
 }
