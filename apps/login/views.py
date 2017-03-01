@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import User
+from ..toys.models import Toy, Image
 from django.db.models import Count
 from django.contrib import messages
 import bcrypt
@@ -51,12 +52,10 @@ def register(request):
             request.session['user_id'] = user1.id
             request.session['first_name'] = user1.first_name
             request.session['username'] = user1.username
-            # context = {
-            #     "user_trips": Trip.objects.filter(user_id = user1.id),
-            #     "user_added_trips": Group.objects.filter(user_id = user1.id),
-            #     "other_trips": Trip.objects.exclude(user_id = user1.id)
-            # }
-            return render(request, 'toys/index1.html')
+            context = {
+                "toys": Toy.objects.all().order_by('-created_at'),
+            }
+            return render(request, 'toys/main.html', context)
 
 
 def login(request):
@@ -70,13 +69,17 @@ def login(request):
         request.session['user_id'] = user1[0].id
         request.session['first_name'] = user1[0].first_name
         request.session['username'] = user1[0].username
-        # context = {
-        #     "user_trips": Trip.objects.filter(user_id = user1[0].id),
-        #     "user_added_trips": Group.objects.filter(user_id = user1[0].id),
-        #     "other_trips": Trip.objects.exclude(user_id = user1[0].id)
-        # }
-        return render(request, 'toys/index1.html')
+        context = {
+            "toys": Toy.objects.all().order_by('-created_at'),
+        }
+        return render(request, 'toys/main.html', context)
 
     else:
         messages.error(request, 'The email and password you entered do not match! Please try again.')
         return redirect('/')
+
+def logout(request):
+    request.session.pop('user_id')
+    request.session.pop('first_name')
+    request.session.pop('username')
+    return render(request, 'login/index.html')

@@ -28,44 +28,39 @@
 
               </div>
             </nav>
-            <h3 class="center" id="greet">Hello, {{request.session.first_name}}, this is the posting board for all the toys..</h3>
+            <h3 class="center" id="greet">{{request.session.first_name}}, you can upload the toy pictures in this page.</h3>
 
-           <div class="row">
-               {% for toy in toys %}
-           <div class="col s12 m4">
-             <div class="card blue darken-1 hoverable">
-               <div class="card-content white-text">
-                 <h4 class="card-title">Toy Name: {{toy.name}}</h4>
-                 <div class="divider"></div>
-                 <br />
-                 <p>id: &nbsp;{{toy.id}}</p>
-                 <p>Original MSRP: &nbsp;{{toy.msrp}}</p>
-                 <p>Asking Price: &nbsp;${{toy.price}}</p>
-                 <p>For Age Group: &nbsp;{{toy.age}}</p>
-                 <p>Category: &nbsp;{{toy.category}}</p>
-                 <p>Condition: &nbsp;{{toy.condition}}</p>
-                 <p>Comments: &nbsp;{{toy.text}}</p>
-                 <p>Posting User: &nbsp;{{toy.user.first_name}} - "{{toy.user.username}}"</p>
-                 <p>Posted at: &nbsp;{{toy.created_at}}</p>
-                 <!-- <img src="{{image.img}}" /> -->
-                 {% if request.session.user_id == toy.user_id %}
-                 <a class="btn-floating fab waves-effect waves-light red right" href='{% url 'toys:delete' id=toy.id %}'><i class="material-icons">delete</i></a>
-                 <a class="btn-floating fab waves-effect waves-light green right" href='{% url 'toys:add' id=toy.id %}'><i class="material-icons">add</i></a>
-                 {% endif %}
+            <form action='{% url 'toys:image' id=id %}' method='post' enctype='multipart/form-data'>
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col s3"></div>
+                  <div class="col s6 center">
+                      <div class="file-field input-field">
+                          <div class="btn">
+                              <span>Toy Picture</span>
+                              <input type="file" name="image">
+                          </div>
+                          <div class="file-path-wrapper">
+                              <input class="file-path validate" type="text">
+                          </div>
+                    </div>
+                  </div>
                </div>
-             </div>
-           </div>
-           {% endfor %}
-         </div>
-         <div id="new">
-             <div class="row">
-                 <div class="col s2 right" >
-                     <button id="new_button" class="btn waves-effect blue"><a href='{% url 'toys:goto' %}'>Create Post</a>
-                         <i class="material-icons right">mode_edit</i>
-                     </button>
-                 </div>
-             </div>
-         </div>
+               <div class="row">
+                   <div class="input-field col s4"></div>
+                   <div class="col s2" >
+                       <button id="login_button" class="btn waves-effect blue" type="submit" name="action">Upload
+                           <i class="material-icons right">done</i>
+                       </button>
+                   </div>
+                   <div class="col s2" >
+                       <button class="btn waves-effect blue"><a href='{% url 'toys:goback' %}'>Go Back</a>
+                           <i class="material-icons right">repeat</i>
+                       </button>
+                   </div>
+                </div>
+            </form>
+
 
             <div class="fixed-action-btn horizontal">
               <a class="btn-floating btn-large red">

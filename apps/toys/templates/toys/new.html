@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Main Page</title>
+        {% load staticfiles %}
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'login/css/materialize.min.css' %}">
+        <link rel="stylesheet" href="{% static 'toys/css/toys.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="{% static 'login/js/materialize.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'toys/js/toys.js' %}"></script>
+        <div id="wrapper">
+            <nav>
+              <div class="nav-wrapper blue-grey lighten-1 hoverable" id="header">
+                <a href="#!" class="brand-logo left"><span id="logo">Toys X Change</span></a>
+                <div id="logout">
+                    <div class="row">
+                        <div class="col s2 right" >
+                            <button id="logout_button" class="btn waves-effect blue" type="submit" name="action"><a href='{%  url 'login:logout' %}'>Logout</a></button>
+                        </div>
+                    </div>
+                </div>
+
+              </div>
+            </nav>
+            <h3 class="center" id="greet">{{request.session.first_name}}, you can input your toys' information here..</h3>
+
+            <form action='{% url 'toys:create' %}' method='post'>
+                {% csrf_token %}
+                <div class="row">
+                    <div class="input-field col s3"></div>
+                    <div class="input-field col s3">
+                          <div class="input-field inline">
+                            <i class="material-icons prefix">android</i>
+                            <input id="name" type="text" class="validate" name="name">
+                            <label for="name">Toy's Name</label>
+                          </div>
+                    </div>
+                    <div class="input-field col s3">
+                          <div class="input-field inline">
+                            <i class="material-icons prefix">textsms</i>
+                            <input id="price" type="text" class="validate" name="price">
+                            <label for="price">Listing Price</label>
+                          </div>
+                    </div>
+                    <div class="input-field col s3"></div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s3"></div>
+                    <div class="input-field col s3">
+                        <select name="msrp">
+                          <option value="" disabled selected>Choose your toys's original MSRP</option>
+                          <option value="Under $10">Under $10</option>
+                          <option value="$10 - $20">$10 - $20</option>
+                          <option value="$20 - $30">$20 - $30</option>
+                          <option value="$30 - $40">$30 - $40</option>
+                          <option value="$40 - $50">$40 - $50</option>
+                          <option value="$50 - $100">$50 - $100</option>
+                        </select>
+                        <label>Toy's MSRP</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <select name="age">
+                          <option value="" disabled selected>Choose your toys's age group</option>
+                          <option value="For Babies (0-2 years)">For Babies (0-2 years)</option>
+                          <option value="For Toddlers (2-3 years)">For Toddlers (2-3 years)</option>
+                          <option value="For Preschoolers (3-5 years)">For Preschoolers (3-5 years)</option>
+                          <option value="For Grade Schoolers (5-12 years)">For Grade Schoolers (5-12 years)</option>
+                          <option value="For Adults">For Adults</option>
+                          <option value="General Age Group">General</option>
+                        </select>
+                        <label>Toy's Age Group</label>
+                    </div>
+                    <div class="input-field col s3"></div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s3"></div>
+                    <div class="input-field col s3">
+                        <select name="category">
+                          <option value="" disabled selected>Choose your toys's category</option>
+                          <option value="Action Figures">Action Figures</option>
+                          <option value="Video Games">Video Games</option>
+                          <option value="Dolls">Dolls</option>
+                          <option value="Legos">Legos</option>
+                          <option value="Cars">Cars</option>
+                          <option value="Bikes">Bikes</option>
+                        </select>
+                        <label>Toy's Category</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <select name="condition">
+                          <option value="" disabled selected>Choose your toys's Condition</option>
+                          <option value="Brand New">Brand New</option>
+                          <option value="Like New In Box">Like New In Box</option>
+                          <option value="Gently Used">Gently Used</option>
+                          <option value="Used">Used</option>
+                          <option value="Needs Repairs">Needs Repairs</option>
+                          <option value="For Parts...">For Parts...</option>
+                        </select>
+                        <label>Toy's Condition</label>
+                    </div>
+                    <div class="input-field col s3"></div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s3"></div>
+                   <div class="input-field col s6">
+                     <textarea id="textarea1" name="text" class="materialize-textarea"></textarea>
+                     <label for="textarea1">Description</label>
+                   </div>
+                   <div class="input-field col s3"></div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s3"></div>
+                    <div class="col s3" >
+                        <button id="login_button" class="btn waves-effect blue" type="submit" name="action">Post my toy
+                            <i class="material-icons right">done</i>
+                        </button>
+                    </div>
+                    <div class="col s3" >
+                        <button class="btn waves-effect blue"><a href='{%  url 'toys:goback' %}'>Go Back</a>
+                            <i class="material-icons right">repeat</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="fixed-action-btn horizontal">
+              <a class="btn-floating btn-large red">
+                <i class="large material-icons">mode_edit</i>
+              </a>
+              <ul>
+                <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+                <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+                <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+                <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+              </ul>
+            </div>
+
+            <footer class="page-footer blue-grey lighten-1  hoverable" id="bottom">
+              <div class="container">
+                <div class="row">
+                  <div class="col l6 s12">
+                    <h5 class="white-text">Toys X Change</h5>
+                    <p class="grey-text text-lighten-4">Need to get rid of your kids old toys? Toys X change is the service that connects toys swappers together.</p>
+                  </div>
+                  <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                      <li><a class="grey-text text-lighten-3" href="#!">About</a></li>
+                      <li><a class="grey-text text-lighten-3" href="#!">How It Works</a></li>
+                      <li><a class="grey-text text-lighten-3" href="#!">Contacts</a></li>
+                      <li><a class="grey-text text-lighten-3" href="#!">Terms of Service</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="footer-copyright">
+                <div class="container">
+                © 2017 Copyright J.Z.  All Rights Reserved
+                <a class="grey-text text-lighten-4 right" href="#!">Customer Service</a>
+                </div>
+              </div>
+            </footer>
+        </div>
+    </body>

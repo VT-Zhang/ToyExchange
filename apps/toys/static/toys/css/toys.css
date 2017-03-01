@@ -1,0 +1,25 @@
+#logo{
+    font-weight: 200;
+    font-size: 30px;
+    height: 100px;
+    margin-left: 150px;
+    font-size: 40px;
+}
+
+#wrapper{
+    background-color: #e1f5fe;
+    font-weight: 200;
+    background-image: url("{% static 'toys/img/sports.png' %}");
+
+}
+
+#header{
+}
+
+#greet{
+    margin-left: 30px;
+}
+
+#new_button{
+    color:white;
+}
