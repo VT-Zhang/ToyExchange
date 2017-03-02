@@ -12,6 +12,7 @@ class Toy(models.Model):
     category = models.CharField(max_length=45)
     condition = models.CharField(max_length=45)
     text = models.TextField(max_length=1000)
+    zipcode = models.CharField(max_length=5)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, related_name='useruser')

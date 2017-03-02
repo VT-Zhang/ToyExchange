@@ -15,6 +15,7 @@
         <script type="text/javascript" src="{% static 'login/js/materialize.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'toys/js/toys.js' %}"></script>
         <div id="wrapper">
+            <a name="top"></a>
             <nav>
               <div class="nav-wrapper blue-grey lighten-1 hoverable" id="header">
                 <a href="#!" class="brand-logo left"><span id="logo">Toys X Change</span></a>
@@ -28,56 +29,66 @@
 
               </div>
             </nav>
-            <h3 class="center" id="greet">Hello, {{request.session.first_name}}, this is the posting board for all the toys..</h3>
+            <h3 class="center" id="greet">Hello, {{request.session.first_name}}! This is the posting board for all the toys..</h3>
 
-           <div class="row">
+            <div id="new">
+                <div class="row">
+                    <div class="col s2 right" >
+                        <a class="waves-effect blue btn" href='{% url 'toys:goto' %}'>Create Post</a>
+                    </div>
+                </div>
+            </div>
+
+
+       <div class="row">
                {% for toy in toys %}
-           <div class="col s12 m4">
-             <div class="card blue darken-1 hoverable">
+           <div class="col s12 m6">
+             <div class="card light-blue hoverable">
                <div class="card-content white-text">
                  <h4 class="card-title">Toy Name: {{toy.name}}</h4>
                  <div class="divider"></div>
                  <br />
                  <p>id: &nbsp;{{toy.id}}</p>
-                 <p>Original MSRP: &nbsp;{{toy.msrp}}</p>
-                 <p>Asking Price: &nbsp;${{toy.price}}</p>
-                 <p>For Age Group: &nbsp;{{toy.age}}</p>
-                 <p>Category: &nbsp;{{toy.category}}</p>
-                 <p>Condition: &nbsp;{{toy.condition}}</p>
-                 <p>Comments: &nbsp;{{toy.text}}</p>
-                 <p>Posting User: &nbsp;{{toy.user.first_name}} - "{{toy.user.username}}"</p>
-                 <p>Posted at: &nbsp;{{toy.created_at}}</p>
-                 <!-- <img src="{{image.img}}" /> -->
+                 <p>[Original MSRP]: &nbsp;{{toy.msrp}}</p>
+                 <p>[Asking Price]: &nbsp;${{toy.price}}</p>
+                 <p>[For Age Group]: &nbsp;{{toy.age}}</p>
+                 <p>[Category]: &nbsp;{{toy.category}}</p>
+                 <p>[Condition]: &nbsp;{{toy.condition}}</p>
+                 <p>[Comments]: &nbsp;{{toy.text}}</p>
+                 <p>[Posting User]: &nbsp;{{toy.user.first_name}} - "{{toy.user.username}}"</p>
+                 <p>[Contact This User by Email]: &nbsp;<u>{{toy.user.email}}</p>
+                 <p>[Posted at]: &nbsp;{{toy.created_at}}</p>
+                 <br/>
+                 <div class="divider"></div>
+                 <br/>
+                 <p>The toy is located in this area, zipcode: {{toy.zipcode}}.</p>
+                 <br/>
+                 <img src="https://maps.googleapis.com/maps/api/staticmap?center={{toy.zipcode}}&zoom=13&size=550x400&markers=color:red%7C{{toy.zipcode}}&key=AIzaSyDFnW8QKPeWixw3nC4w2vkdRWZ4v3wQDfY" />
                  {% if request.session.user_id == toy.user_id %}
                  <a class="btn-floating fab waves-effect waves-light red right" href='{% url 'toys:delete' id=toy.id %}'><i class="material-icons">delete</i></a>
                  <a class="btn-floating fab waves-effect waves-light green right" href='{% url 'toys:add' id=toy.id %}'><i class="material-icons">add</i></a>
                  {% endif %}
+
+             </br/>
                </div>
              </div>
            </div>
            {% endfor %}
-         </div>
-         <div id="new">
-             <div class="row">
-                 <div class="col s2 right" >
-                     <button id="new_button" class="btn waves-effect blue"><a href='{% url 'toys:goto' %}'>Create Post</a>
-                         <i class="material-icons right">mode_edit</i>
-                     </button>
-                 </div>
-             </div>
-         </div>
+       </div>
 
-            <div class="fixed-action-btn horizontal">
-              <a class="btn-floating btn-large red">
-                <i class="large material-icons">mode_edit</i>
-              </a>
-              <ul>
-                <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-                <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-                <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-                <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
-              </ul>
-            </div>
+
+
+       <div class="fixed-action-btn horizontal">
+         <a class="btn-floating btn-large red">
+           <i class="large material-icons">mode_edit</i>
+         </a>
+         <ul>
+           <li><a class="btn-floating red" href='{% url 'login:logout' %}'><i class="material-icons">exit_to_app</i></a></li>
+           <li><a class="btn-floating yellow darken-1" href='{% url 'toys:goback' %}'><i class="material-icons">reply</i></a></li>
+           <li><a class="btn-floating blue" href='{% url 'toys:goto' %}'><i class="material-icons">attach_file</i></a></li>
+           <li><a class="btn-floating green" href="#top"><i class="material-icons">publish</i></a></li>
+         </ul>
+       </div>
 
             <footer class="page-footer blue-grey lighten-1  hoverable" id="bottom">
               <div class="container">

@@ -54,9 +54,7 @@
                        </button>
                    </div>
                    <div class="col s2" >
-                       <button class="btn waves-effect blue"><a href='{% url 'toys:goback' %}'>Go Back</a>
-                           <i class="material-icons right">repeat</i>
-                       </button>
+                       <a class="waves-effect blue btn" href='{% url 'toys:goback' %}'><i class="material-icons right">reply</i>Go Back</a>
                    </div>
                 </div>
             </form>
@@ -67,10 +65,10 @@
                 <i class="large material-icons">mode_edit</i>
               </a>
               <ul>
-                <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-                <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-                <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-                <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+                <li><a class="btn-floating red" href='{% url 'login:logout' %}'><i class="material-icons">exit_to_app</i></a></li>
+                <li><a class="btn-floating yellow darken-1" href='{% url 'toys:goback' %}'><i class="material-icons">reply</i></a></li>
+                <li><a class="btn-floating blue" href='{% url 'toys:goto' %}'><i class="material-icons">attach_file</i></a></li>
+                <li><a class="btn-floating green" href="#top"><i class="material-icons">publish</i></a></li>
               </ul>
             </div>
 

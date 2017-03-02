@@ -11,35 +11,26 @@ def index(request):
 def register(request):
     if request.method == 'POST':
         alert = []
-        toast = ""
         validation = True
         check_user = User.objects.filter(username=request.POST['username'])
         if check_user:
             alert.append('The username already exists, please try another username.')
-            toast += "<span>The username already exists, please try another username.</span>"
             validation = False
         if len(request.POST['first_name']) < 2 or len(request.POST['last_name']) < 2 or len(request.POST['username']) < 2:
             alert.append('Names and Usernames cannot be less than 2 letters.')
-            toast += "<span>Names and Usernames cannot be less than 2 letters.</span>"
             validation = False
         if str.isalpha(str(request.POST['first_name'])) == False or str.isalpha(str(request.POST['last_name'])) == False :
             alert.append('Names cannot contain any numbers.')
-            toast += "<span>Names cannot contain any numbers.</span>"
             validation = False
         if len(request.POST['password']) < 1 or len(request.POST['confirm']) < 1 or len(request.POST['username']) < 1 or len(request.POST['email']) < 1 :
             alert.append('All fields are required and must not be blank.')
-            toast += "<span>All fields are required and must not be blank.</span>"
             validation = False
         if len(request.POST['password']) < 8:
             alert.append('Password should be 8 or more characters.')
-            toast += "<span>Password should be 8 or more characters.</span>"
             validation = False
         if request.POST['confirm'] != request.POST['password']:
             alert.append('Passwords do not match.')
-            toast += "<span>Passwords do not match.</span>"
             validation = False
-        request.session['toast'] = toast
-
 
         if validation == False:
             for i in range(0, len(alert)):
@@ -54,6 +45,7 @@ def register(request):
             request.session['username'] = user1.username
             context = {
                 "toys": Toy.objects.all().order_by('-created_at'),
+                "images": Image.objects.all(),
             }
             return render(request, 'toys/main.html', context)
 
@@ -71,6 +63,7 @@ def login(request):
         request.session['username'] = user1[0].username
         context = {
             "toys": Toy.objects.all().order_by('-created_at'),
+            "images": Image.objects.all(),
         }
         return render(request, 'toys/main.html', context)
 
@@ -79,7 +72,5 @@ def login(request):
         return redirect('/')
 
 def logout(request):
-    request.session.pop('user_id')
-    request.session.pop('first_name')
-    request.session.pop('username')
+    request.session.clear()
     return render(request, 'login/index.html')
