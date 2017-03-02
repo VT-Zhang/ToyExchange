@@ -50,3 +50,26 @@ def image(request, id):
         "images": Image.objects.all(),
     }
     return render(request,'toys/main.html', context)
+
+def goto_edit(request, id):
+    context = {
+        "toy": Toy.objects.filter(id=id),
+    }
+    return render(request,'toys/edit.html', context)
+
+def edit(request, id):
+    Toy.objects.filter(id=id).update(name=request.POST['name'], zipcode=request.POST['zipcode'],price=request.POST['price'], msrp=request.POST['msrp'], age=request.POST['age'], category=request.POST['category'], condition=request.POST['condition'], text=request.POST['text'])
+    context = {
+        "toys": Toy.objects.all().order_by('-updated_at'),
+        "images": Image.objects.all(),
+    }
+    return render(request,'toys/main.html', context)
+
+def user_all(request, id):
+    context = {
+        "toys": Toy.objects.filter(user_id=id),
+        "images": Image.objects.all(),
+        "user": User.objects.filter(id=id),
+
+    }
+    return render(request,'toys/user_all.html', context)

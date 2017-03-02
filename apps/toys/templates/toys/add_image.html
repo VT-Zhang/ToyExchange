@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Main Page</title>
+        <title>Toys X Change - Upload Photo</title>
         {% load staticfiles %}
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'login/css/materialize.min.css' %}">
@@ -25,11 +25,12 @@
                         </div>
                     </div>
                 </div>
-
               </div>
             </nav>
-            <h3 class="center" id="greet">{{request.session.first_name}}, you can upload the toy pictures in this page.</h3>
-
+            <h3 class="center" id="greet">{{request.session.first_name}}, UPLOAD the toy photo here.</h3>
+            <br />
+            <br />
+            <br />
             <form action='{% url 'toys:image' id=id %}' method='post' enctype='multipart/form-data'>
                 {% csrf_token %}
                 <div class="row">
@@ -46,6 +47,8 @@
                     </div>
                   </div>
                </div>
+               <br />
+               <br />
                <div class="row">
                    <div class="input-field col s4"></div>
                    <div class="col s2" >
@@ -62,12 +65,12 @@
 
             <div class="fixed-action-btn horizontal">
               <a class="btn-floating btn-large red">
-                <i class="large material-icons">mode_edit</i>
+                <i class="large material-icons">menu</i>
               </a>
               <ul>
                 <li><a class="btn-floating red" href='{% url 'login:logout' %}'><i class="material-icons">exit_to_app</i></a></li>
                 <li><a class="btn-floating yellow darken-1" href='{% url 'toys:goback' %}'><i class="material-icons">reply</i></a></li>
-                <li><a class="btn-floating blue" href='{% url 'toys:goto' %}'><i class="material-icons">attach_file</i></a></li>
+                <li><a class="btn-floating blue" href='{% url 'toys:goto' %}'><i class="material-icons">mode_edit</i></a></li>
                 <li><a class="btn-floating green" href="#top"><i class="material-icons">publish</i></a></li>
               </ul>
             </div>

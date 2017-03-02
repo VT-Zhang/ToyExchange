@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Toys X Change - Create New Post</title>
+        <title>Toys X Change - Update Post</title>
         {% load staticfiles %}
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'login/css/materialize.min.css' %}">
@@ -28,30 +28,30 @@
 
               </div>
             </nav>
-            <h3 class="center" id="greet">{{request.session.first_name}}, CREATE a new post for your toy.</h3>
-
-            <form action='{% url 'toys:create' %}' method='post'>
+            <h3 class="center" id="greet">{{request.session.first_name}}, you can UPDATE your toy's information here..</h3>
+                {% for toy in toy %}
+            <form action='{% url 'toys:edit' id=toy.id %}' method='post'>
                 {% csrf_token %}
                 <div class="row">
                     <div class="input-field col s3"></div>
                     <div class="input-field col s2">
                           <div class="input-field inline">
                             <i class="material-icons prefix">android</i>
-                            <input id="name" type="text" class="validate" name="name">
+                            <input value="{{toy.name}}" id="name" type="text" class="validate" name="name">
                             <label for="name">Toy's Name</label>
                           </div>
                     </div>
                     <div class="input-field col s2">
                           <div class="input-field inline">
                             <i class="material-icons prefix">payment</i>
-                            <input id="price" type="text" class="validate" name="price">
+                            <input value="{{toy.price}}" id="price" type="text" class="validate" name="price">
                             <label for="price">Listing Price</label>
                           </div>
                     </div>
                     <div class="input-field col s2">
                           <div class="input-field inline">
                             <i class="material-icons prefix">room</i>
-                            <input id="zip" type="text" class="validate" name="zipcode">
+                            <input value="{{toy.zipcode}}" id="zip" type="text" class="validate" name="zipcode">
                             <label for="zip">Location Zipcode</label>
                           </div>
                     </div>
@@ -118,16 +118,16 @@
                 <div class="row">
                     <div class="input-field col s3"></div>
                    <div class="input-field col s6">
-                     <textarea id="textarea1" name="text" class="materialize-textarea"></textarea>
+                     <textarea id="textarea1" name="text" class="materialize-textarea">{{toy.text}}</textarea>
                      <label for="textarea1">Description</label>
                    </div>
                    <div class="input-field col s3"></div>
                 </div>
-
+                {% endfor %}
                 <div class="row">
                     <div class="input-field col s3"></div>
                     <div class="col s3" >
-                        <button id="login_button" class="btn waves-effect blue" type="submit" name="action">Post my toy
+                        <button id="login_button" class="btn waves-effect blue" type="submit" name="action">Update my toy
                             <i class="material-icons right">done</i>
                         </button>
                     </div>

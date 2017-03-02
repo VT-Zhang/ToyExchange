@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Toys X Change - Main Page</title>
+        <title>Toys X Change - All Toys For This User</title>
         {% load staticfiles %}
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'login/css/materialize.min.css' %}">
@@ -41,12 +41,13 @@
 
               </div>
             </nav>
-            <h3 class="center" id="greet">Hello, <i>{{request.session.first_name}}</i> ! Welcome to the posting board!</h3>
-
+            {% for user in user %}
+            <h3 class="center" id="greet"><i>{{request.session.first_name}}</i>, you are viewing all the post for user - <u>"{{user.first_name}}"</u></h3>
+            {% endfor %}
             <div id="new">
                 <div class="row">
-                    <div class="col s2 right" >
-                        <a class="waves-effect blue btn" href='{% url 'toys:goto' %}'>Create Post</a>
+                    <div class="col s2 right">
+                        <a class="waves-effect blue btn" href='{% url 'toys:goback' %}'><i class="material-icons right">reply</i>Go Back</a>
                     </div>
                 </div>
             </div>
@@ -57,19 +58,8 @@
            <div class="col s12 m6">
              <div class="card light-blue hoverable">
                <div class="card-content white-text">
-                   <h3 id="toy_name" class="card-title center-align">Toy Name: <i>{{toy.name}}</i></h3>
-                   <br />
-                   <div class="row">
-                       <div class="col s5" >
-                           <h3 class="card-title black-text">Seller Name: {{toy.user.first_name}}</h3>
-                       </div>
-                       <div class="col s2 right" >
-                           <a class="waves-effect orange darken-1 btn" href='{% url 'toys:user_all' id=toy.user_id %}'>View</a>
-                       </div>
-                       <div class="col s3 right" >
-                           <p>Click this button to view all the posts of this user.</p>
-                       </div>
-                 </div>
+                 <h4 id="toy_name" class="card-title center">Toy Name: <i>{{toy.name}}</i></h4>
+                 <br />
                  <div class="divider"></div>
                  <br />
                  {% if request.session.user_id == toy.user_id %}
@@ -86,7 +76,6 @@
                  <p class="txt"><span class="item">[ Comments ]:</span> &nbsp;{{toy.text}}</p>
                  <p class="txt"><span class="item">[ Contact This User by Email ]:</span> &nbsp;<u>{{toy.user.email}}</u></p>
                  <p class="txt"><span class="item">[ Posted at ]:</span> &nbsp;{{toy.created_at}}</p>
-
                  <br/>
                  {% for image in images %}
                  {% if image.toy_id == toy.id %}
@@ -101,7 +90,9 @@
                  <p class="txt">This toy is located at zipcode: {{toy.zipcode}}.</p>
                  <br/>
                  <img src="https://maps.googleapis.com/maps/api/staticmap?center={{toy.zipcode}}&zoom=12&size=600x400&markers=color:red%7C{{toy.zipcode}}&key=AIzaSyDFnW8QKPeWixw3nC4w2vkdRWZ4v3wQDfY" />
-                </br/>
+
+
+             </br/>
                </div>
              </div>
            </div>

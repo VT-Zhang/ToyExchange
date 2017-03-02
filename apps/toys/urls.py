@@ -11,6 +11,9 @@ urlpatterns = [
     url(r'^delete/(?P<id>\d+)$', views.delete, name='delete'),
     url(r'^add/(?P<id>\d+)$', views.add, name='add'),
     url(r'^image/(?P<id>\d+)$', views.image, name='image'),
+    url(r'^goto_edit/(?P<id>\d+)$', views.goto_edit, name='goto_edit'),
+    url(r'^edit/(?P<id>\d+)$', views.edit, name='edit'),
+    url(r'^user_all/(?P<id>\d+)$', views.user_all, name='user_all'),
 ]
 
 if settings.DEBUG is True:
