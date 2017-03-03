@@ -23,12 +23,23 @@
                         <div class="col s2 right" >
                             <button id="logout_button" class="btn waves-effect blue" type="submit" name="action"><a href='{%  url 'login:logout' %}'>Logout</a></button>
                         </div>
+                        <div class="col s2 right" >
+                              <a class='dropdown-button btn blue' href='#' data-activates='dropdown1'>Toys by Category</a>
+                              <ul id='dropdown1' class='dropdown-content'>
+                                <li><a href="{% url 'toys:category' category='Action Figures' %}">Action Figures</a></li>
+                                <li><a href="{% url 'toys:category' category='Video Games' %}">Video Games</a></li>
+                                <li><a href="{% url 'toys:category' category='Legos' %}">Legos</a></li>
+                                <li><a href="{% url 'toys:category' category='Dolls' %}">Dolls</a></li>
+                                <li><a href="{% url 'toys:category' category='Cars' %}">Cars</a></li>
+                                <li><a href="{% url 'toys:category' category='Bikes' %}">Bikes</a></li>
+                              </ul>
+                        </div>
                     </div>
                 </div>
 
               </div>
             </nav>
-            <h3 class="center" id="greet">{{request.session.first_name}}, you can UPDATE your toy's information here..</h3>
+            <h3 class="center" id="greet">{{request.session.first_name}}, UPDATE your toy's information here..</h3>
                 {% for toy in toy %}
             <form action='{% url 'toys:edit' id=toy.id %}' method='post'>
                 {% csrf_token %}

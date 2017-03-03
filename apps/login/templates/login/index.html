@@ -17,9 +17,8 @@
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="{% static 'login/js/materialize.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'login/js/java.js' %}"></script>
+
     <div id="wrapper">
-
-
         <nav>
           <div class="nav-wrapper blue-grey lighten-1 hoverable" id="header">
             <a href="#!" class="brand-logo left"><span id="logo">Toys X Change</span></a>
@@ -58,7 +57,7 @@
               <div class="container">
                   <div class="row">
                       <div class="col l8 s12 white-text">
-                          <h4 class="thin-text valign" id='main_txt'>Toys X Change is revolutionary website for parents who want to barter or sell unused toys for their children.</h4>
+                          <h4 class="thin-text valign" id='main_txt'>Toys X Change is the revolutionary online marketplace for people to barter or sell unused toys.</h4>
                       </div>
                   </div>
               </div>
@@ -75,26 +74,13 @@
               {% endif %}
           </div>
 
-          <!-- <div class="row">
-              <div class="col s12 m6">
-              <div class="section ">
-                  <div class="carousel">
-                    <a class="carousel-item" href="#one!"><img src="{% static 'login/img/prime.png' %}"></a>
-                    <a class="carousel-item" href="#two!"><img src="{% static 'login/img/leg.png' %}"></a>
-                    <a class="carousel-item" href="#three!"><img src="{% static 'login/img/fish.png' %}"></a>
-                    <a class="carousel-item" href="#four!"><img src="{% static 'login/img/doll.png' %}"></a>
-                    <a class="carousel-item" href="#five!"><img src="{% static 'login/img/truck.png' %}"></a>
-                  </div>
-              </div>
-            </div>
-        </div> -->
         <div class="section light-blue lighten-5">
             <div class="container ">
                 <div class="row">
                     <h2 class="center-align" id="service"> How It Works</h2>
                 </div>
                 <div class="row">
-                    <div class="col l6 m12 s12">
+                    <div class="col m6 s12">
                         <div class="card medium light-blue accent-4 z-depth-3 hoverable">
                             <div class="card-content white-text">
                                 <h3 class="center-align"><i class="large material-icons prefix">web</i></h3>
@@ -106,7 +92,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col l6 m12 s12">
+                    <!-- <div class="col m4 s12">
+                        <div class="carousel">
+                           {% for image in images %}
+                           <a class="carousel-item" href="#one!"><img src="../../media/{{image.img}}"></a>
+                           {% endfor %}
+                        </div>
+                    </div> -->
+                    <div class="col m6 s12">
                         <div class="card medium light-blue accent-4 z-depth-3 hoverable">
                             <div class="card-content white-text">
                                 <h3 class="center-align"><i class="large material-icons prefix">search</i></h3>
@@ -123,91 +116,85 @@
         </div>
 
 
-
-
-          </div>
+          <!-- </div> -->
           <div class="parallax-container">
             <div class="parallax"><img src="{% static 'login/img/Lego.jpg' %}"></div>
           </div>
 
-          <div class="section light-blue lighten-5">
-            <div class="row container">
-                  <h4 class="header center-align">Not A User Yet? Register Now!</h4>
-                    <form class="col s12" action='{% url 'login:register' %}' method='post'>
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="col s3">
 
-                            </div>
-                          <div class="input-field col s3">
-                              <i class="material-icons prefix">account_circle</i>
-                              <input name= "first_name" id="first_name" type="text" class="validate">
-                              <label for="first">First Name</label>
-                          </div>
-                          <div class="input-field col s3">
-                              <i class="material-icons prefix">perm_identity</i>
-                              <input name= "last_name" id="last_name" type="text" class="validate">
-                              <label for="last_name">Last Name</label>
-                          </div>
-                          <div class="col s3">
-
-                          </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s3">
-
-                            </div>
-                          <div class="input-field col s3">
-                              <i class="material-icons prefix">assignment_ind</i>
-                              <input name= "username" id="username" type="text" class="validate">
-                              <label for="username">Userame</label>
-                          </div>
-                          <div class="input-field col s3">
-                              <i class="material-icons prefix">email</i>
-                              <input name= "email" id="email" type="text" class="validate">
-                              <label for="email">Email</label>
-                          </div>
-                          <div class="col s3">
-
-                          </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s3">
-
-                            </div>
-                              <div class="input-field col s3">
-                                  <i class="material-icons prefix">vpn_key</i>
-                                  <input name= "password" placeholder="8 or more characters" id="password" type="text" class="validate">
-                                  <label for="password">Password</label>
-                              </div>
-                              <div class="input-field col s3">
-                                  <i class="material-icons prefix">vpn_key</i>
-                                  <input name= "confirm" id="confirm" type="text" class="validate">
-                                  <label for="confirm">Confirm PW</label>
-                              </div>
+            <div class="section light-blue lighten-5">
+              <div class="row container">
+                    <h4 class="header center-align">Not A User Yet? Register Now!</h4>
+                      <form class="col s12" action='{% url 'login:register' %}' method='post'>
+                          {% csrf_token %}
+                          <div class="row">
                               <div class="col s3">
 
                               </div>
-                        </div>
-                        <div class="row">
+                            <div class="input-field col s3">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input name= "first_name" id="first_name" type="text" class="validate">
+                                <label for="first">First Name</label>
+                            </div>
+                            <div class="input-field col s3">
+                                <i class="material-icons prefix">perm_identity</i>
+                                <input name= "last_name" id="last_name" type="text" class="validate">
+                                <label for="last_name">Last Name</label>
+                            </div>
                             <div class="col s3">
 
                             </div>
-                            <div class="col s2">
-                                <button class="btn waves-effect blue" type="submit" name="action">Register
-                                    <i class="material-icons right">input</i>
-                                </button>
+                          </div>
+                          <div class="row">
+                              <div class="col s3">
+
+                              </div>
+                            <div class="input-field col s3">
+                                <i class="material-icons prefix">assignment_ind</i>
+                                <input name= "username" id="username" type="text" class="validate">
+                                <label for="username">Userame</label>
                             </div>
-
-                            <div class="col s7">
+                            <div class="input-field col s3">
+                                <i class="material-icons prefix">email</i>
+                                <input name= "email" id="email" type="text" class="validate">
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="col s3">
 
                             </div>
-                        </div>
-                    </form>
-                    <br />
+                          </div>
+                          <div class="row">
+                              <div class="col s3">
 
-                </div>
+                              </div>
+                                <div class="input-field col s3">
+                                    <i class="material-icons prefix">vpn_key</i>
+                                    <input name= "password" placeholder="8 or more characters" id="password" type="text" class="validate">
+                                    <label for="password">Password</label>
+                                </div>
+                                <div class="input-field col s3">
+                                    <i class="material-icons prefix">vpn_key</i>
+                                    <input name= "confirm" id="confirm" type="text" class="validate">
+                                    <label for="confirm">Confirm PW</label>
+                                </div>
+                                <div class="col s3">
 
+                                </div>
+                          </div>
+                          <div class="row">
+                              <div class="col s3">
+
+                              </div>
+                              <div class="col s2">
+                                  <button class="btn waves-effect blue" type="submit" name="action">Register
+                                      <i class="material-icons right">input</i>
+                                  </button>
+                              </div>
+                          </div>
+                      </form>
+                      <br />
+                  </div>
+              </div>
         </main>
 
         <div class="fixed-action-btn horizontal">

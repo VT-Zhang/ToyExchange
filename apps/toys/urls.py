@@ -14,6 +14,8 @@ urlpatterns = [
     url(r'^goto_edit/(?P<id>\d+)$', views.goto_edit, name='goto_edit'),
     url(r'^edit/(?P<id>\d+)$', views.edit, name='edit'),
     url(r'^user_all/(?P<id>\d+)$', views.user_all, name='user_all'),
+    url(r'^category/(?P<category>\D+)$', views.category, name='category'),
+
 ]
 
 if settings.DEBUG is True:

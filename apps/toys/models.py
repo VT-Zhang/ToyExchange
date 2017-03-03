@@ -7,7 +7,7 @@ from PIL import Image
 class Toy(models.Model):
     name = models.CharField(max_length=45)
     msrp = models.CharField(max_length=45)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
+    price = models.DecimalField(max_digits=7, decimal_places=2)
     age = models.CharField(max_length=45)
     category = models.CharField(max_length=45)
     condition = models.CharField(max_length=45)

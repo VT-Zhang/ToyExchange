@@ -6,7 +6,11 @@ from django.contrib import messages
 import bcrypt
 
 def index(request):
-    return render(request, 'login/index.html')
+    context = {
+        "toys": Toy.objects.all().order_by('-created_at'),
+        "images": Image.objects.all().order_by('-id')[:10],
+    }
+    return render(request, 'login/index.html', context)
 
 def register(request):
     if request.method == 'POST':
@@ -73,4 +77,8 @@ def login(request):
 
 def logout(request):
     request.session.clear()
-    return render(request, 'login/index.html')
+    context = {
+        "toys": Toy.objects.all().order_by('-created_at'),
+        "images": Image.objects.all().order_by('-id')[:10],
+    }
+    return render(request, 'login/index.html', context)

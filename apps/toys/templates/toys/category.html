@@ -52,9 +52,7 @@
 
               </div>
             </nav>
-            {% for user in user %}
-            <h3 class="center" id="greet">All the posts for <i>"{{user.first_name}}"</i></h3>
-            {% endfor %}
+            <h3 class="center" id="greet">All the posts for <i>"{{request.session.category}}"</i> Category.</h3>
             <div id="new">
                 <div class="row">
                     <div class="col s2 right">
