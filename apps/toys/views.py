@@ -15,7 +15,7 @@ def index(request):
 def create(request):
     alert = []
     validation = True
-    if len(request.POST['name']) < 1 or len(request.POST['price']) < 1 or len(request.POST['zipcode']) < 1 or len(request.POST['text']) < 1:
+    if len(request.POST['name']) < 1 or len(request.POST['price']) < 1 or len(request.POST['zipcode']) < 1 or len(request.POST['text']) < 1 or request.POST['msrp'] == "" or request.POST['age'] == "" or request.POST['category'] == "" or request.POST['condition'] == "":
         alert.append('All fields are required and must not be blank.')
         validation = False
     if len(request.POST['zipcode']) != 5:
@@ -73,18 +73,37 @@ def image(request, id):
         return render(request,'toys/main.html', context)
 
 def goto_edit(request, id):
+    request.session['id'] = id
     context = {
         "toy": Toy.objects.filter(id=id),
     }
     return render(request,'toys/edit.html', context)
 
 def edit(request, id):
-    Toy.objects.filter(id=id).update(name=request.POST['name'], zipcode=request.POST['zipcode'],price=request.POST['price'], msrp=request.POST['msrp'], age=request.POST['age'], category=request.POST['category'], condition=request.POST['condition'], text=request.POST['text'])
-    context = {
-        "toys": Toy.objects.all().order_by('-updated_at'),
-        "images": Image.objects.all(),
-    }
-    return render(request,'toys/main.html', context)
+    alert = []
+    validation = True
+    if len(request.POST['name']) < 1 or len(request.POST['price']) < 1 or len(request.POST['zipcode']) < 1 or len(request.POST['text']) < 1 or request.POST['msrp'] == "" or request.POST['age'] == "" or request.POST['category'] == "" or request.POST['condition'] == "":
+        alert.append('All fields are required and must not be blank.')
+        validation = False
+    if len(request.POST['zipcode']) != 5:
+        alert.append('Please use 5 digits zipcode.')
+        validation = False
+
+    if validation == False:
+        for i in range(0, len(alert)):
+            messages.error(request, alert[i])
+        context = {
+            "toy": Toy.objects.filter(id=request.session['id']),
+        }
+        return render(request, 'toys/edit.html', context)
+
+    else:
+        Toy.objects.filter(id=id).update(name=request.POST['name'], zipcode=request.POST['zipcode'],price=request.POST['price'], msrp=request.POST['msrp'], age=request.POST['age'], category=request.POST['category'], condition=request.POST['condition'], text=request.POST['text'])
+        context = {
+            "toys": Toy.objects.all().order_by('-updated_at'),
+            "images": Image.objects.all(),
+        }
+        return render(request,'toys/main.html', context)
 
 def user_all(request, id):
     context = {

@@ -73,7 +73,7 @@
                     <div class="input-field col s3"></div>
                     <div class="input-field col s3">
                         <select name="msrp">
-                          <option value="" disabled selected>Choose your toys's original MSRP</option>
+                          <option value="">Choose your toys's original MSRP</option>
                           <option value="Under $10">Under $10</option>
                           <option value="$10 - $20">$10 - $20</option>
                           <option value="$20 - $30">$20 - $30</option>
@@ -85,7 +85,7 @@
                     </div>
                     <div class="input-field col s3">
                         <select name="age">
-                          <option value="" disabled selected>Choose your toys's age group</option>
+                          <option value="">Choose your toys's age group</option>
                           <option value="For Babies (0-2 years)">For Babies (0-2 years)</option>
                           <option value="For Toddlers (2-3 years)">For Toddlers (2-3 years)</option>
                           <option value="For Preschoolers (3-5 years)">For Preschoolers (3-5 years)</option>
@@ -102,7 +102,7 @@
                     <div class="input-field col s3"></div>
                     <div class="input-field col s3">
                         <select name="category">
-                          <option value="" disabled selected>Choose your toys's category</option>
+                          <option value="">Choose your toys's category</option>
                           <option value="Action Figures">Action Figures</option>
                           <option value="Video Games">Video Games</option>
                           <option value="Dolls">Dolls</option>
@@ -114,7 +114,7 @@
                     </div>
                     <div class="input-field col s3">
                         <select name="condition">
-                          <option value="" disabled selected>Choose your toys's Condition</option>
+                          <option value="">Choose your toys's Condition</option>
                           <option value="Brand New">Brand New</option>
                           <option value="Like New In Box">Like New In Box</option>
                           <option value="Gently Used">Gently Used</option>
@@ -135,6 +135,17 @@
                    <div class="input-field col s3"></div>
                 </div>
                 {% endfor %}
+
+                <div id="messages" class="center-align red-text">
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+
                 <div class="row">
                     <div class="input-field col s3"></div>
                     <div class="col s3" >
